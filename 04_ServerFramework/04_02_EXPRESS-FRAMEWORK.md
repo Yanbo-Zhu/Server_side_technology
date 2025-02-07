@@ -274,6 +274,8 @@ app.get('/example/c', [c0, c1, c2]);
 
 
 Router – Zusammenstellung einer Middleware
+
+这个文件存在了 `.vorlesung` 下 
 ```js
 let express=require('express');
 let router=express.Router();
@@ -342,7 +344,7 @@ Nutzung von Templates
 app.set('view engine', 'ejs');
 
 //Übergabe des Template-Verzeichnisses
-app.set('views', '/app/views');
+app.set('views', '/app/views');   //  /app/views 这个文件夹下有一个 名字 为 index 的文件 
 
 //Füllen des Templates mit Daten
 // 这个是怎么知道 要去 render 那个 template 的 

@@ -185,6 +185,8 @@ app.listen(8080);
 
 # 4 Unterschiedlich Anfrage/Kontrollflüsse
 
+write() 不会发信息给 client ,  end() 才会把信息给client 
+
 Identische Anfrage-/Kontrollflüsse: Erste Middleware versendet Response
 ![](images/Pasted%20image%2020250202205759.png)\
 
