@@ -4,9 +4,18 @@
 
 ![](images/Pasted%20image%2020250116213521.png)
 
+# 2 
+
+Node.js ist eine serverseitige Plattform, die es ermöglicht, JavaScript außerhalb des Browsers auszuführen. Es basiert auf der V8-JavaScript-Engine von Google Chrome und ist geeignet für die Erstellung skalierbarer, ereignisgesteuerter und nicht blockierender Serveranwendungen.
+
+Grundkonzepte von Node.js
+1. Ereignisgesteuerte Architektur: Node.js verwendet ein Event-Loop-Modell, wodurch es skalierbar und effizient ist.
+2. Nicht-blockierende I/O: Aufgaben wie Dateioperationen oder Netzwerkanfragen blockieren nicht den Haupt-Thread.
+3. Modularität: Node.js verwendet das CommonJS-Modulsystem, sodass Funktionen und Module einfach wiederverwendet werden können.
 
 
-# 2 Integrierte Module (Auswahl)
+
+# 3 Integrierte Module (Auswahl)
 
 | Modulname           | Beschreibung                                                     |
 | ------------------- | ---------------------------------------------------------------- |
@@ -45,7 +54,7 @@
 |`**vm**`|Ausführungsumgebung für JavaScript-Code|
 |`**zlib**`|Möglichkeit zum Komprimieren und Dekomprimieren von Daten|
 
-# 3 Möglichkeiten der Kommunikation
+# 4 Möglichkeiten der Kommunikation
 
 
 ![](images/Pasted%20image%2020250118132724.png)
@@ -62,10 +71,10 @@
 - Websockets: direkte Kommunikation über das Transportprotokoll (TCP oder UDP)
 
 
-# 4 Einfache Node.js-Server
+# 5 Einfache Node.js-Server
 
 
-## 4.1 Rückgabe von Text
+## 5.1 Rückgabe von Text
 
 Node.js 作为 server, 收到 client 的 anfrage, 然后 答复 这个 Client 某些信息 
 
@@ -137,7 +146,7 @@ console.log('Webserver wird ausgeführt.');
 ![](images/Pasted%20image%2020250118133507.png)
 
 
-## 4.2 Auslesen von QUERY-Parametern
+## 5.2 Auslesen von QUERY-Parametern
 
 ```js
 // run `node server04.js` in the terminal
@@ -170,7 +179,7 @@ console.log('Webserver wird ausgeführt.');
 如果在 url 中 不写 ?name=thomas , 则会显示 Hello undefined 
 
 
-## 4.3 Auslesen des Request Body
+## 5.3 Auslesen des Request Body
 
 一个 request 一般来说 会分批到来 ,  读取每个 packet 中的 data, 
 以及 在 包全都到来后, 去做 什么动作 
@@ -215,7 +224,7 @@ curl -d "user=foobar&pass=12345&id=blablabla&ding=submit" http://localhost:8080
 - Beachte: `**on**`-Methode alternativ für `**addListener**`
 
 
-# 5 Auslieferung statischer Dateien
+# 6 Auslieferung statischer Dateien
 
 nodeserver   去读取一个 datei, 把他发给前端 
 
@@ -280,7 +289,7 @@ console.log('Webserver wird gestartet.');
 - `**fs**`: Operationen auf dem lokalen Dateisystem, zum Beispiel Lesen oder Schreiben von Dateien
 - Beachte: Lesen einer Datei erfolgt asynchron, d.h. Verarbeitung der gelesenen Daten durch Callback-Funktion
 
-# 6 Node.js als Client
+# 7 Node.js als Client
 
 Node.js 作为 client, 不是作为 server,   . 他主动发给 别的 机器 一些信息 
 
@@ -362,14 +371,14 @@ request.end();
 ```
 
 
-## 6.1 http.get('url', res ⇒ {})
+## 7.1 http.get('url', res ⇒ {})
 
 In **Node.js** wird `http.get()` verwendet, um eine **HTTP-GET-Anfrage** zu senden. Es ist eine Methode aus dem **`http`-Modul** und eignet sich besonders für einfache Abrufe von Daten von einer URL.
 
 **Wie funktioniert `http.get()`?**
-1. sendet eine GET-Anfrage an die angegebene URL.
-2. gibt ein http.ClientRequest-Objekt zurück, mit dem man Fehlerbehandlung durchführen kann.
-3. verarbeitet die Antwort (res), die ein http.IncomingMessage-Objekt ist:
+4. sendet eine GET-Anfrage an die angegebene URL.
+5. gibt ein http.ClientRequest-Objekt zurück, mit dem man Fehlerbehandlung durchführen kann.
+6. verarbeitet die Antwort (res), die ein http.IncomingMessage-Objekt ist:
     1. res.on('data', callback) – Empfängt die Daten in Chunks.
     2. res.on('end', callback) – Wird aufgerufen, wenn alle Daten eingetroffen sind.
 
@@ -386,7 +395,7 @@ http.get('http://irgendeine-url.com', (res) => {
 Hierbei handelt es sich nicht um dieselbe res wie bei http.createServer((req, res)=>{}) !!
 
 
-# 7 Der Unterschied zwischen Responses in http.createServer() und in http.get() 
+# 8 Der Unterschied zwischen Responses in http.createServer() und in http.get() 
 
 Der Unterschied liegt in der Rolle im HTTP-Kommunikationsprozess.
 
