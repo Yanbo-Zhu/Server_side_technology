@@ -130,9 +130,9 @@ app.post('/signup', async function(req, res, next) {
   let salt=bcrypt.genSaltSync(10);
   let user = new User(req.body);
   user.password = bcrypt.hashSync(req.body.password, salt);
-  user.thumbnail = user.username + '.jpg';  
+  user.thumbnail = user.username + '.jpg';  //   只存 Datei name, 因为图片本身存在了其他的地方 一个静态地址 
   try {
-    await user.save();
+    await user.save();  // Aufruf an DB dauert ein bisschen 
     return res.status(200).send('OK');
   } catch (err) {
     return res.status(500).json({error: err.message});
@@ -163,7 +163,9 @@ app.post('/signup', async function(req, res, next) {
 - Im Fehlerfall: Fehlermeldung wird der nächsten Middleware-Funktion übergeben
 - Im Erfolgsfall: gelesene Daten werden zur Bestätigung an die Antwort angehängt
 
-# 4 Hashen und Salzen von Passwörtern mit bcrypt (I/III)
+# 4 Hashen und Salzen von Passwörtern mit bcrypt
+
+hashwert -> dictorionary -> plaintext 
 
 ![](images/Pasted%20image%2020250206224152.png)
 - Passwörter dürfen nicht im Klartext in der Datenbank gespeichert werden
@@ -177,7 +179,9 @@ app.post('/signup', async function(req, res, next) {
 - Generierung eines Salts mit   `**bcrypt.genSaltSync(10);**`
 - Parameter gibt Schwierigkeitsgrad des Salts an
 - Berechnung des gesalzenen Hashs mit `**bcrypt.hashSync(req.body.password, salt);**`
-- Überprüfung eines präsentierten Klartext-Passworts mit `**bcrypt.compareSync(password, user.password))**`
+- Überprüfung eines präsentierten Klartext-Passworts mit `**bcrypt.compareSync(password, user.password))**`  
+    - password 是 用户这时候 input 进来的 password  in plaintext.. 
+    - user.password 存在的mongoDB 中的 password (加密过的 )
 
 
 # 5 Passwort-Strategie mit Anbindung über Mongoose 

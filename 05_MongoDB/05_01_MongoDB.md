@@ -19,10 +19,24 @@ BSON
 
 ![](images/Pasted%20image%2020250206221208.png)
 
+mongod:  mongo daemon
 
 
+# 3 
 
-# 3 Einführende Beispiele
+一些常用命令 
+```sh
+show db 查看 mongo 系统中 一共保存了 多少的 db 
+use yasn   使用其中一个 db
+show collections   比如说 会出现两个 collection  users and message 
+
+// 在某个 collection 查找某个 ducument 
+db.users.find()  
+db.message.find() 
+```
+
+
+# 4 Einführende Beispiele
 
 
 Beispiel für Schreiboperationen
@@ -35,7 +49,7 @@ Beispiel für Leseoperationen
 ![](images/Pasted%20image%2020250206221443.png)
 
 
-# 4 CRUD – Einfügen (CReate) neuer Dokumente (I/II)
+# 5 CRUD – Einfügen (CReate) neuer Dokumente (I/II)
 
 ```js
 db.posts.insert({
@@ -55,6 +69,7 @@ db.posts.update({
 
 
 db.posts.save({
+// 如果不写 "_id": Object("45c230a123d45efab2340"),, 自动生成一个 id 
   "title": "Second Post",
   "user": "Alice"
 })
@@ -77,7 +92,7 @@ db.posts.save({
 - `**save(document)**`: weitere Alternative, die optional die Definition einer eigenen `**_id**` erlaubt
 
 
-# 5 CRUD – Lesen (READ) von Dokumenten 
+# 6 CRUD – Lesen (READ) von Dokumenten 
 
 - `**find(selectionCriteria)**`: Methode zum Finden und Lesen von Dokumenten einer Kollektion
 - `**selectionCriteria**` enthält einfache oder zusammengesetzte Anfrageselektoren
@@ -107,7 +122,7 @@ db.posts.find({
 ```
 
 
-# 6 CRUD – Aktualisieren (Update) und Löschen (DELETE)
+# 7 CRUD – Aktualisieren (Update) und Löschen (DELETE)
 
 ```js
 db.posts.update({
@@ -139,7 +154,7 @@ db.posts.remove({"user": "Alice"}, true)
 - `**selectionCriteria**`: s.o.
 - `**justOne**`: zeigt an, dass bei mehreren Dokumenten, die `**selectionCriteria**` erfüllen, nur eines gelöscht wird
 
-# 7 Replikation 
+# 8 Replikation 
 
 ![](images/Pasted%20image%2020250206222810.png)
 
@@ -158,7 +173,7 @@ db.posts.remove({"user": "Alice"}, true)
 - Bei Ausfall des Primary Node wird aus der Gruppe der verbleibenden Secondary Nodes ein neuer Primary gewählt
 
 
-# 8 Skalierbarkeit 
+# 9 Skalierbarkeit 
 
 ![](images/Pasted%20image%2020250206223040.png)
 
@@ -203,7 +218,7 @@ Shared Key
 - Verwaltung der Routing-Informationen basierend auf Zuweisung der Chunks zu Shards
 
 
-# 9 Indexierung 
+# 10 Indexierung 
 
 ![](images/Pasted%20image%2020250206223425.png)
 
