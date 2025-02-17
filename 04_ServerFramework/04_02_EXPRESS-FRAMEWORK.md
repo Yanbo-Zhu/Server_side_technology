@@ -50,7 +50,7 @@ const server = http.createServer((req, res) => {
 	  }
 	  // 404-Fehlerbehandlung für alle anderen Routen
 	  else { 
-			  res.writeHead(404, { 'Content-Type': 'text/plain' });
+			res.writeHead(404, { 'Content-Type': 'text/plain' });
 		    res.end('Seite nicht gefunden');
 	  }
 });
@@ -706,7 +706,7 @@ Middleware 3: /user - Antwort wird gesendet
 ```
 
 Antwort an den Client:
-```
+```js
 {
     "name": "Szymon",
     "role": "Tutor"
@@ -965,6 +965,10 @@ app.get('/', (req, res) => {
 - `app.use(cookieParser());` aktiviert das `cookie-parser`-Modul.
     - Diese Middleware liest Cookies aus eingehenden HTTP-Anfragen und speichert sie als Objekt in `req.cookies`.
     - Ohne `cookieParser() `wären Cookies nur als unstrukturierter String verfügbar.
+
+
+browser 中查看 cookies 
+![](images/Pasted%20image%2020250212220453.png)
 
 ## 6.3 body-parser
 

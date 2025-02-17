@@ -10,12 +10,15 @@
     - Präsentation und Darstellung
     - Kommunikation
 
+
 MVC Pattern
 - **_MVC_**: **_Model-View-Controller_**
 - Funktionale Aufteilung einer Webanwendung in getrennte Module
 - **_View_**: Nutzerinterface, d.h. Darstellung einer Webanwendung und Interaktion mit dem Nutzer
 - **_Model_**: Datenstrukturen einer Webanwendung und assoziierte Aufgaben, d.h. Lesen und Schreiben von Daten sowie Persistenz
 - **_Controller_**: Bearbeitung von Anfragen, Sitzungsmanagement sowie Verknüpfung von Model und View
+
+
 
 # 2 SPA – Verschiebung des View in den Client
 
