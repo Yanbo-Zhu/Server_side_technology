@@ -1,4 +1,7 @@
 
+Mongoose 是一个 JavaScript 面向对象的编程库，它在 MongoDB 和 Node.js JavaScript 运行时环境之间创建连接。它提供了一种简单的、基于模式的解决方案来对应用程序数据进行建模。
+
+
 ![](images/Pasted%20image%2020250206223704.png)
 
 
