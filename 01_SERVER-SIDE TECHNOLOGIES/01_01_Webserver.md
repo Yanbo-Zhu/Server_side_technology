@@ -1,4 +1,31 @@
 
+
+# 总览 
+
+In diesem Kapitel werden wir drei unterschiedliche Webserver behandeln:
+- den Apache Webserver,
+- den nginx Webserver,
+- und den node.js Webserver.
+
+Es gibt **unterschiedliche Webserver** für ganz unterschiedliche Zwecke. Beispielsweise gibt es in vielen Druckern einen Webserver, um den Druckstatus über einen Browser (oder ein Desktop-Programm) abrufen zu können. Oder auch Heizungsthermostate, die über einen Webserver gesteuert werden. An diese Webserver werden natürlich ganz andere Anforderungen gestellt, als an Hochleistungs-Webserver für bekannte Internet-Auftritte.
+
+In diesem Kapitel behandeln wir drei sehr bekannte Webserver für "normale Internetauftritte":
+
+- **Apache Webserver**: Das "Urgestein". Läuft sehr stabil und kann für alle möglichen Anwendungs- und Spezialfälle konfiguriert werden, ist also **sehr flexibel** einsetzbar. Der Apache Webserver ist "workerprozessbasiert". Somit bekommt jeder Client-Request einen eigenen Workerprozess zugewiesen - und damit die gesamte Mächtigkeit und Schwerfälligkeit des Apache. Es wird für einen Client-Request, bei dem ein Bild angefordert wird, beispielsweise auch das PHP-Modul des Webservers, so wie alle anderen Module im Workerprozess, geladen. Je nach Hardwareausstattung des Servers und nach Anzahl der (gleichzeitigen) Client-Requests, kann dies zu einem Performance-Problem führen.
+- **nginx Webserver**: Ein schlanker, eventbasierter Webserver mit viel geringeren Konfigurationsmöglichkeiten und ohne die schwergewichtigen Workerprozesse. Somit ist der nginx **sehr performant**. Oftmals werden nginx und Apache-Webserver auch gemeinsam eingesetzt. Dabei übernimmt der nginx auf einem Server alle statischen Ressourcen (Bilder, CSS-Dateien etc.) und leitet nur die "Spezialanfragen" an einen anderen Server weiter (als Load-Balancer), auf dem dann ein Apache läuft. So kann man in einer "Server-Farm" die hohe Performance des nginx und die gute Flexibilität des Apache nutzen.
+- **node.js Webserver**: Ein neuer Webserver, der in **JavaScript** geschrieben ist und ebenfalls eventbasiert arbeitet. Interessant ist der node.js, da er nicht nur ein Web-, sondern auch eine Art **"Datenstrom"-Server** ist. So kann er auch als TCP-Server arbeiten, oder für den asynchronen Netzwerkzugriff eingesetzt werden.
+
+
+**Prinzipielle Funktionsweise**  
+Jeder Server hat eine eindeutige IP-Adresse bzw. eine Domain oder URI, die auf diese IP-Adresse zeigt. Über die IP-Adresse kommt die Anfrage bis zum Server. Auf dem Server können unterschiedliche Serverprozesse laufen, die jeweils ein ganz bestimmtes Protokoll erwarten und als "Hintergrundprozess" (engl. deamon) auf eine Anfrage warten. Diese Anfragen "lauschen" auf einem Port. Beim Protokoll HTTP ist dies, standardmäßig voreingestellt, der Port 80.
+
+Ablauf einer Client-Anfrage:
+- Dem Webserver wird eine feste IP-Nummer zugeordnet, sodass der Client den gewünschten Server ansprechen kann.
+- Auf dem Server wiederum werden die verschiedenen Anfragen über Portnummern an das entsprechende Programm weitergeleitet.
+- Der Standard-Port für den Webserver ist Port 80.
+- Jede Anfrage auf Port 80 wird an das Server-Programm weitergeleitet und dort von einem Prozess bearbeitet.
+
+
 # 1 NGINX versus Node.js
 
 
