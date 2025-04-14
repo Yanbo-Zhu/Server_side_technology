@@ -6,6 +6,16 @@ Die Dokumentation für den nginx ist unter [https://nginx.org/en/docs/](https://
 
 **nginx Webserver**: Ein schlanker, eventbasierter Webserver mit viel geringeren Konfigurationsmöglichkeiten und ohne die schwergewichtigen Workerprozesse. Somit ist der nginx **sehr performant**. Oftmals werden nginx und Apache-Webserver auch gemeinsam eingesetzt. Dabei übernimmt der nginx auf einem Server alle statischen Ressourcen (Bilder, CSS-Dateien etc.) und leitet nur die "Spezialanfragen" an einen anderen Server weiter (als Load-Balancer), auf dem dann ein Apache läuft. So kann man in einer "Server-Farm" die hohe Performance des nginx und die gute Flexibilität des Apache nutzen.
 
+
+Nginx ist ein leistungsstarker und vielseitiger Webserver, der hauptsächlich für folgende Zwecke eingesetzt wird:
+
+1. Webserver: Er liefert statische Inhalte wie HTML, CSS und Bilder schnell und effizient an die Clients.
+2. Reverse Proxy: Nginx leitet Anfragen an andere Server weiter, beispielsweise an Backend-Anwendungen wie Node.js, und fungiert dabei als Vermittler.
+3. Load Balancer: Er verteilt eingehende Anfragen gleichmäßig auf mehrere Backend-Server, um Lastspitzen zu bewältigen und die Verfügbarkeit zu erhöhen.
+4. Gateway für APIs: Nginx kann verwendet werden, um Anfragen an verschiedene Microservices zu koordinieren.
+5. Caching: Er speichert Inhalte zwischengespeichert, um die Serverleistung zu verbessern.
+
+
 # 1 Einsatzzweck und Unterschiede zum Apache
 
 Der nginx ist die schlanke und performante Alternative zum Apache-Webserver, bei der vieles ähnlich zu sein scheint.

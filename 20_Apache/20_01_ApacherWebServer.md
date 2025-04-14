@@ -16,7 +16,7 @@ Daher ist es wichtig, dass Sie sich mit der Konfiguration des Apache-Webservers 
 
 Ob der Apache läuft, kann mit _**ps aux | grep apache2**_ ermittelt werden. In der Abbildung sehen wir sechs Prozesse.
 
-![[Apache-1grep.png]]
+![[images/Apache-1grep.png]]
 
 - Der oberste Prozess läuft unter _root_ und ist der Managerprozess. Die Aufgabe des Managerprozesses ist die Bereitstellung von so vielen Bearbeiterprozessen, wie in der Konfigurationsdatei angegeben sind.
 - Die anderen fünf Prozesse laufen in diesem Beispiel unter dem Nutzer _www-data_. Dabei handelt es sich um einen nicht-privilegierten Nutzer, der automatisch vom Webserver eingerichtet wurde. Diese fünf Prozesse können Anfragen (Client-Requests) entgegennehmen und bearbeiten.
@@ -146,12 +146,12 @@ Die Hauptkonfigurationsdatei befindet sich in Linux-Systemen im Verzeichnis _**/
 Die Aufgabe ist also, dass man möglichst viele Module ausschaltet und die zugehörigen Konfigurationsdateien genau analysiert.
 
 
-![[Apache4-Konfigurationsbaum.png]]
+![[images/Apache4-Konfigurationsbaum.png]]
 
 ## 6.1 _**/etc/apache2**_  
 Im Verzeichnis _**/etc/apache2**_ gibt es die Hauptkonfigurationsdatei _**apache2.conf**_ und eine Datei _**ports.conf**_, in der die Standardports festgelegt werden. Dies sind Port 80 für HTTP und Port 443 für die gesicherte Verbindung HTTPS. In der Abbildung sieht man eine kleine Konfigurationsdatei.
 
-![[Apache5-ports.conf.png]]
+![[images/Apache5-ports.conf.png]]
 
 
 ## 6.2 _**mods-enabled**_  

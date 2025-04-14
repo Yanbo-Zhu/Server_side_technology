@@ -127,7 +127,7 @@ Eine gute Erklärung, wann welche Section-Direktiven verwendet werden, findet si
 
 Es gibt eine Reihe von Section-Direktiven, die Wichtigsten sind fett dargestellt:
 
-![[Pasted image 20250414154717.png]]
+![[images/Pasted image 20250414154717.png]]
 
 
 |                                                                                        |                                                                                                                                                                                                                                          |

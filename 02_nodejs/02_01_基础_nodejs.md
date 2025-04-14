@@ -13,7 +13,7 @@ Das "Geheimnis" dabei ist, dass (fast) alle Events in Node.js durch Callbacks ab
 
 
 
-![](images/Pasted%20image%2020250116213521.png)
+![](../01_网络基础理论/image/Pasted%20image%2020250116213521.png)
 
 
 Node.js ist eine serverseitige Plattform, die es ermöglicht, JavaScript außerhalb des Browsers auszuführen. Es basiert auf der V8-JavaScript-Engine von Google Chrome und ist geeignet für die Erstellung skalierbarer, ereignisgesteuerter und nicht blockierender Serveranwendungen.
