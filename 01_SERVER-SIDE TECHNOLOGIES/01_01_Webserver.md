@@ -1,6 +1,6 @@
 
 
-# 总览 
+# 1 总览 
 
 In diesem Kapitel werden wir drei unterschiedliche Webserver behandeln:
 - den Apache Webserver,
@@ -26,7 +26,7 @@ Ablauf einer Client-Anfrage:
 - Jede Anfrage auf Port 80 wird an das Server-Programm weitergeleitet und dort von einem Prozess bearbeitet.
 
 
-# 1 NGINX versus Node.js
+# 2 NGINX versus Node.js
 
 
 NGINX
@@ -65,8 +65,8 @@ Backend-Konfigurationen mit Node.js und NGINX
 
 ![](images/Pasted%20image%2020250116212542.png)
 
-# 2 Multi- versus Single-Thread Server
-## 2.1 MULTI-THREAD (ODER SYNCHRONER) SERVER 
+# 3 Multi- versus Single-Thread Server
+## 3.1 MULTI-THREAD (ODER SYNCHRONER) SERVER 
 
 ![](images/Pasted%20image%2020250116212630.png)
 
@@ -91,7 +91,7 @@ Backend-Konfigurationen mit Node.js und NGINX
 
 
 
-## 2.2 SINGLE-THREAD (ODER ASYNCHRONER) SERVER
+## 3.2 SINGLE-THREAD (ODER ASYNCHRONER) SERVER
 
 ![](images/Pasted%20image%2020250116213003.png)
 
@@ -110,7 +110,7 @@ Backend-Konfigurationen mit Node.js und NGINX
 - Voraussetzung: rechenarme Aufgaben mit vielen I/O-Operationen (z.B. Webapplikationen)
 
 
-# 3 Multi- versus Single-Thread Server
+# 4 Multi- versus Single-Thread Server
 
 ![](images/Pasted%20image%2020250116213248.png)
 
@@ -118,7 +118,7 @@ Backend-Konfigurationen mit Node.js und NGINX
 - _**nginx**_: Single-Thread-Server mit asynchroner Verarbeitung und nicht-blockierende Threads (vergleichbar zu Node.js)
 
 
-# 4 Prinzipien der Erstellung dynamischer Webseiten (I/III)
+# 5 Prinzipien der Erstellung dynamischer Webseiten (I/III)
 
 1 Möglichkeit: Server-Programm generiert HTML für Multi-Page Applications
 

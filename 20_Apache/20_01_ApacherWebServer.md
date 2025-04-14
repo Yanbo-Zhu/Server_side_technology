@@ -12,7 +12,7 @@ Der Apache ist noch immer der bekannteste Webserver. Doch während er früher "i
 Daher ist es wichtig, dass Sie sich mit der Konfiguration des Apache-Webservers eingehend beschäftigen, bevor sie diesen produktiv einsetzen.
 
 
-# **Manager- und Bearbeiterprozesse (=Workerprozesse)**  
+# 1 **Manager- und Bearbeiterprozesse (=Workerprozesse)**  
 
 Ob der Apache läuft, kann mit _**ps aux | grep apache2**_ ermittelt werden. In der Abbildung sehen wir sechs Prozesse.
 
@@ -34,7 +34,7 @@ Ob der Apache läuft, kann mit _**ps aux | grep apache2**_ ermittelt werden. In 
 
 
 
-# **Starten und Stoppen des Apache (Linux)**  
+# 2 **Starten und Stoppen des Apache (Linux)**  
 
 Mit _**systemctl stop apache2**_ und _**systemctl start apache2**_ können Sie den Apache stoppen und starten. Beim Stoppen werden alle offenen Verbindungen (Client Requests) abgebrochen. Dies ist bei produktiven Systemen natürlich unerwünscht, sodass mit _**systemctl reload apache2**_ die Prozesse ohne Unterbrechung neugestartet werden können.
 
@@ -44,7 +44,7 @@ Aufgabe: Stoppen Sie den Webserver und schauen Sie mit _ps aux | grep apache_ na
 
 
 
-# Direkte Programmoptionen für apache2
+# 3 Direkte Programmoptionen für apache2
 
 
 Der Webserver wird normalerweise über das Startskript (also _systemctl start apache2_) gestartet. Im Startskript selbst steht selbstverständlich der Aufruf des Webserver-Programms _apache2._ Das Webserver-Programm kennt verschiedene Optionen.
@@ -75,7 +75,7 @@ Tipp: Falls die Daten nicht in den gezeigten Verzeichnissen vorhanden sind, kön
 
 
 
-# Modularer Aufbau des Apache
+# 4 Modularer Aufbau des Apache
 
 
 Bevor wir uns die Konfigurationsdateien ansehen, schauen wir uns hier das generelle Modulkonzept des Apache-Webservers an.
@@ -103,7 +103,7 @@ Es gibt also beim Apache Module auf unterschiedlichen Ebenen. Die mit _apache2 -
 Das Modul _**mod_so.c**_ hat eine Sonderstellung, denn es ermöglicht, andere Module als "Shared Object" dynamisch einzubinden. Hierzu genügt es, dass die entsprechenden Module in der Konfigurationsdatei aufgerufen werden.
 
 
-# Apache Module
+# 5 Apache Module
 
 Neben den zwingend notwendigen, gibt es eine ganze Reihe zusätzlicher Module für spezielle Anwendungsfälle. Eine Liste der Standardmodule findet sich unter [https://httpd.apache.org/docs/2.4/en/mod/](https://httpd.apache.org/docs/2.4/en/mod/). Zusätzlich gibt es noch "externe" Module, zu denen beispielsweise auch das PHP-Modul gehört. Diese finden sich unter [http://modules.apache.org/](http://modules.apache.org/).
 
@@ -132,7 +132,7 @@ Jedes dieser zahlreichen Module hat eigene Konfigurationsparameter. Somit ist es
 |**mod_ratelimit**|Bandwidth Rate Limiting for Clients|
 |**mod_usertrack**|Clickstream|
 
-# Die Verzeichnisstruktur des apache2
+# 6 Die Verzeichnisstruktur des apache2
 
 
 Die Verzeichnisstruktur ist auf jedem Betriebssystem etwas anders, jedoch ist der prinzipielle Aufbau gleich.
@@ -148,13 +148,13 @@ Die Aufgabe ist also, dass man möglichst viele Module ausschaltet und die zugeh
 
 ![[Apache4-Konfigurationsbaum.png]]
 
-##  _**/etc/apache2**_  
+## 6.1 _**/etc/apache2**_  
 Im Verzeichnis _**/etc/apache2**_ gibt es die Hauptkonfigurationsdatei _**apache2.conf**_ und eine Datei _**ports.conf**_, in der die Standardports festgelegt werden. Dies sind Port 80 für HTTP und Port 443 für die gesicherte Verbindung HTTPS. In der Abbildung sieht man eine kleine Konfigurationsdatei.
 
 ![[Apache5-ports.conf.png]]
 
 
-## _**mods-enabled**_  
+## 6.2 _**mods-enabled**_  
 Es gibt ein Unterverzeichnis _**mods-enabled**_, in dem alle eingeschalteten Module mit ihren Konfigurationsdateien vorhanden sind. Die Module selbst werden über die _**.load**_-Dateien geladen. Zu vielen Modulen gibt es entsprechende Konfigurationsdateien _**.conf**_. Nun sollte man für jedes Modul prüfen, ob dieses wirklich benötigt wird.
 
 [![Apache6a-enabled.png](https://isp.eduloop.de/mediawiki/images/isp.eduloop.de/b/b5/Apache6a-enabled.png)](https://isp.eduloop.de/mediawiki/images/isp.eduloop.de/b/b5/Apache6a-enabled.png)
@@ -167,7 +167,7 @@ Das Modul [_**negotiation.conf**_](https://httpd.apache.org/docs/2.4/mod/mod_neg
 Schauen Sie nach, wie viele Module im Verzeichnis _**mods-available**_ auf Ihrem Server prinzipiell zur Verfügung stehen. Sie werden staunen, wie viele es sind.
 
   
-## _**conf-enabled**_  
+## 6.3 _**conf-enabled**_  
 Es gibt ein Unterverzeichnis _**conf-enabled**_, aus dem weitere Konfigurationsdateien geladen werden.
 
 [![Apache-7conf-enabled.png](https://isp.eduloop.de/mediawiki/images/isp.eduloop.de/1/1b/Apache-7conf-enabled.png)](https://isp.eduloop.de/mediawiki/images/isp.eduloop.de/1/1b/Apache-7conf-enabled.png)
@@ -181,7 +181,7 @@ Aufgabe
 Ändern Sie die Einstellungen in der Datei _**security.conf**_ so, dass alle dort beschriebenen Einstellungen auf dem bestmöglichen, angegebenen Sicherheitsniveau stehen. Ihr Server wird danach trotzdem wie gewohnt laufen. Nach der Änderung in der Datei bitte nicht vergessen, den Server mit _**systemctl reload apache2**_ neu zu starten.
 
   
-## _**sites-enabled**_  
+## 6.4 _**sites-enabled**_  
 Der Apache Webserver eignet sich sehr gut, um viele verschiedene Websites mit unterschiedlichen Anforderungen auf einem Webserver zu betreiben. Wenn man verschiedene Websites hat, dann ist es sinnvoll, die speziellen Konfigurationen im Unterverzeichnis _**sites-enabled**_ abzulegen.== In diesem Unterverzeichnis gibt es nur einen Link auf eine Datei in einem Verzeichnis _**sites-available**_. ==
 
 Wir werden an späterer Stelle auf diese Datei noch genauer eingehen, da wir hier nur mit einer Site arbeiten werden.

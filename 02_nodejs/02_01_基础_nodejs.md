@@ -2,9 +2,19 @@
 
 # 1 Die Javascript-Laufzeitumgebung in node.js
 
+
+**node.js** ist kein Webserver im eigentlichen Sinn, sondern vielmehr eine Laufzeitumgebung für **serverseitiges JavaScript**, die als Webserver eingesetzt werden kann.
+
+Node.js ist eine asynchrone, eventbasierte Laufzeitumgebung und wurde für die Entwicklung von skalierbaren Netzwerkanwendungen entworfen. 
+Ein großer Unterschied zwischen Node.js und üblichen Server-Technologien ist, dass Node.js auf einem "Non Blocking"-Laufzeitmodell basiert. Im Vergleich zu Laufzeitmodellen, die Nebenläufigkeit über parallele Threads umsetzen, wie z.B. der Apache-Webserver, ==verwendet Node.js nur einen einzigen Thread, der eine Schleife ausführt==. Diese, die sogenannte **"Event-Loop"**, arbeitet der Reihe nach alle eingehenden Events ab. 
+
+Events können dabei z.B. eingehende Web-Anfragen über das Netzwerk, Laden von Daten aus dem Dateisystem oder Antworten von selbstgestellten Anfragen an andere Web-Services sein. 
+Das "Geheimnis" dabei ist, dass (fast) alle Events in Node.js durch Callbacks abgearbeitet werden. Ein ähnliches Prinzip kennen Sie schon, wenn Sie bereits mit AJAX im Web-Browser gearbeitet haben. Wenn Sie im Browser asynchrone Daten anfordern, übergeben Sie in der Regel eine Funktion, die ausgeführt wird, wenn die angeforderten Daten geladen wurden. Genau dieses Programmiermuster nennt man einen Callback.
+
+
+
 ![](images/Pasted%20image%2020250116213521.png)
 
-# 2 
 
 Node.js ist eine serverseitige Plattform, die es ermöglicht, JavaScript außerhalb des Browsers auszuführen. Es basiert auf der V8-JavaScript-Engine von Google Chrome und ist geeignet für die Erstellung skalierbarer, ereignisgesteuerter und nicht blockierender Serveranwendungen.
 
@@ -14,8 +24,25 @@ Grundkonzepte von Node.js
 3. Modularität: Node.js verwendet das CommonJS-Modulsystem, sodass Funktionen und Module einfach wiederverwendet werden können.
 
 
+## 1.1 **Arbeitsweise der Event-Loop**  
 
-# 3 Integrierte Module (Auswahl)
+Vereinfacht kann man sich vorstellen, dass sich Node.js für alle Events, die behandelt werden sollen, einen Event-Handler mit der Callback-Implementierung vorhält. Tritt nun ein Event auf, wird es in eine Liste (Event-Queue) hinzugefügt. Die Event-Loop arbeitet nun alle Callbacks zu den Events der Reihe nach ab.
+
+[![Webserver-nodeJs-Event-Loop.png](https://isp.eduloop.de/mediawiki/images/isp.eduloop.de/thumb/7/74/Webserver-nodeJs-Event-Loop.png/650px-Webserver-nodeJs-Event-Loop.png)](https://isp.eduloop.de/mediawiki/images/isp.eduloop.de/7/74/Webserver-nodeJs-Event-Loop.png)
+
+Überträgt man die Art der Verarbeitung auf einen einfachen Web-Server mit Datenbank, kann man sich folgendes Beispiel ableiten:
+
+1. Der Server ist gestartet, die Event-Queue ist leer und ein Event-Handler wartet auf eingehende Web-Anfragen.  
+2. Trifft eine Anfrage ein, wird ein passendes Event in die Event-Queue gelegt. Da keine anderen Events warten, wird mit der Verarbeitung begonnen.  
+3. Für die Verarbeitung der Anfrage werden Daten aus der Datenbank benötigt. Es wird ein Event-Handler inkl. Callback erstellt, der die Verarbeitung fortführt, wenn die Daten aus der Datenbank geladen sind, und die Anfrage an die Datenbank abschickt. Damit ist die Verarbeitung im Moment für die Web-Anfrage abgeschlossen und das Event wird aus der Event-Queue entfernt.  
+4. Die in der Zwischenzeit empfangenen Web-Anfragen werden ebenfalls als Event in die Event-Queue abgelegt. Während auf die Daten aus der Datenbank gewartet wird, werden diese der Reihe nach abgearbeitet. Dabei können Web-Anfragen, die ohne Datenbankaufruf auskommen, auch schon komplett bearbeitet werden. Die Anfrage an die Datenbank blockiert also die weitere Verarbeitung nicht (Stichwort: Non Blocking).  
+5. Die Daten aus der Datenbank sind angekommen und erstellen ein Event zur Weiterverarbeitung der Anfrage. Dieses Event wird ebenfalls hinten in die Event-Queue hinzugefügt. Ist dieses Event vorne in der Event-Queue angekommen, wird die Verarbeitung mit den Daten der Datenbank fortgesetzt und eine Antwort an den zugehörigen Browser gesendet.
+
+Die oben beschriebenen Events vermischen sich natürlich mit vielen weiteren server-internen Events. Diese funktionieren aber in ähnlicher Weise. Wichtig ist hierbei, dass tatsächlich nur ein Thread aktiv ist, der über die Event-Loop eine fortlaufende Verarbeitung der Events vornimmt.
+
+  
+
+# 2 Integrierte Module (Auswahl)
 
 | Modulname           | Beschreibung                                                     |
 | ------------------- | ---------------------------------------------------------------- |
@@ -54,7 +81,7 @@ Grundkonzepte von Node.js
 |`**vm**`|Ausführungsumgebung für JavaScript-Code|
 |`**zlib**`|Möglichkeit zum Komprimieren und Dekomprimieren von Daten|
 
-# 4 Möglichkeiten der Kommunikation
+# 3 Möglichkeiten der Kommunikation
 
 
 ![](images/Pasted%20image%2020250118132724.png)
@@ -71,10 +98,10 @@ Grundkonzepte von Node.js
 - Websockets: direkte Kommunikation über das Transportprotokoll (TCP oder UDP)
 
 
-# 5 Einfache Node.js-Server
+# 4 Einfache Node.js-Server
 
 
-## 5.1 Rückgabe von Text
+## 4.1 Rückgabe von Text
 
 Node.js 作为 server, 收到 client 的 anfrage, 然后 答复 这个 Client 某些信息 
 
@@ -146,7 +173,7 @@ console.log('Webserver wird ausgeführt.');
 ![](images/Pasted%20image%2020250118133507.png)
 
 
-## 5.2 Auslesen von QUERY-Parametern
+## 4.2 Auslesen von QUERY-Parametern
 
 ```js
 // run `node server04.js` in the terminal
@@ -179,7 +206,7 @@ console.log('Webserver wird ausgeführt.');
 如果在 url 中 不写 ?name=thomas , 则会显示 Hello undefined 
 
 
-## 5.3 Auslesen des Request Body
+## 4.3 Auslesen des Request Body
 
 一个 request 一般来说 会分批到来 ,  读取每个 packet 中的 data, 
 以及 在 包全都到来后, 去做 什么动作 
@@ -224,7 +251,7 @@ curl -d "user=foobar&pass=12345&id=blablabla&ding=submit" http://localhost:8080
 - Beachte: `**on**`-Methode alternativ für `**addListener**`
 
 
-# 6 Auslieferung statischer Dateien
+# 5 Auslieferung statischer Dateien
 
 nodeserver   去读取一个 datei, 把他发给前端 
 
@@ -289,7 +316,7 @@ console.log('Webserver wird gestartet.');
 - `**fs**`: Operationen auf dem lokalen Dateisystem, zum Beispiel Lesen oder Schreiben von Dateien
 - Beachte: Lesen einer Datei erfolgt asynchron, d.h. Verarbeitung der gelesenen Daten durch Callback-Funktion
 
-# 7 Node.js als Client
+# 6 Node.js als Client
 
 Node.js 作为 client, 不是作为 server,   . 他主动发给 别的 机器 一些信息 
 
@@ -371,7 +398,7 @@ request.end();
 ```
 
 
-## 7.1 http.get('url', res ⇒ {})
+## 6.1 http.get('url', res ⇒ {})
 
 In **Node.js** wird `http.get()` verwendet, um eine **HTTP-GET-Anfrage** zu senden. Es ist eine Methode aus dem **`http`-Modul** und eignet sich besonders für einfache Abrufe von Daten von einer URL.
 
@@ -395,7 +422,7 @@ http.get('http://irgendeine-url.com', (res) => {
 Hierbei handelt es sich nicht um dieselbe res wie bei http.createServer((req, res)=>{}) !!
 
 
-# 8 Der Unterschied zwischen Responses in http.createServer() und in http.get() 
+# 7 Der Unterschied zwischen Responses in http.createServer() und in http.get() 
 
 Der Unterschied liegt in der Rolle im HTTP-Kommunikationsprozess.
 
