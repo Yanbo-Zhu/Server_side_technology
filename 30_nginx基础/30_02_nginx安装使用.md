@@ -10,6 +10,14 @@
 der Installationsordner von nginx unter dem Pfad` /usr/local/etc/nginx/`
 
 
+## 使用 
+
+```sh
+sudo nginx -t       # 检查配置文件语法是否正确
+sudo systemctl reload nginx   # 重新加载配置（不中断连接）
+```
+
+
 # 2 MacOS
 
 1. Installieren Sie ggf. Homebrew, indem Sie folgenden Befehl im Terminal eingeben: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
@@ -48,8 +56,6 @@ cd C:/01_SmallApp/nginx-1.25.3 后 再执行下面的命令
     - powershell 中 : `Get-Process nginx | Stop-Process -Force`
 -  Serverkonfiguration neu laden, conf 变更后 重新载入 
     - nginx -s reload
-
-
 
 
 ## 3.3 Run Nginx as Windows service
