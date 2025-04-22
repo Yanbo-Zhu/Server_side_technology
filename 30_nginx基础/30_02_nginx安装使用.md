@@ -10,7 +10,7 @@
 der Installationsordner von nginx unter dem Pfad` /usr/local/etc/nginx/`
 
 
-## 使用 
+## 1.1 使用 
 
 ```sh
 sudo nginx -t       # 检查配置文件语法是否正确
